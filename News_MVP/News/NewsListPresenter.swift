@@ -1,5 +1,5 @@
 //
-//  NewListPresenter.swift
+//  NewsListPresenter.swift
 //  News_MVP
 //
 //  Created by 장기화 on 2022/01/28.
@@ -13,7 +13,7 @@ protocol NewsListProtocol: AnyObject {
     func endRefreshing()
 }
 
-class NewListPresenter: NSObject {
+class NewsListPresenter: NSObject {
     private weak var viewController: NewsListProtocol?
     
     init(viewController: NewsListProtocol) {
@@ -30,13 +30,13 @@ class NewListPresenter: NSObject {
     }
 }
 
-extension NewListPresenter: UITableViewDelegate {
+extension NewsListPresenter: UITableViewDelegate {
     
 }
 
-extension NewListPresenter: UITableViewDataSource {
+extension NewsListPresenter: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -45,5 +45,11 @@ extension NewListPresenter: UITableViewDataSource {
         cell.selectionStyle = .none
         cell.layoutIfNeeded() // 이거 넣어야 셀높이 맞음
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: NewsListTableViewHeaderView.identifier) as? NewsListTableViewHeaderView
+        header?.layoutIfNeeded()
+        return header
     }
 }

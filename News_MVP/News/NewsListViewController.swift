@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 class NewsListViewController: UIViewController {
-    private lazy var presenter = NewListPresenter(viewController: self)
+    private lazy var presenter = NewsListPresenter(viewController: self)
     
     private lazy var refreshControl: UIRefreshControl = {
         let refresh = UIRefreshControl()
@@ -18,11 +18,13 @@ class NewsListViewController: UIViewController {
     }()
     
     private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero)
+        let tableView = UITableView()
         tableView.delegate = presenter
         tableView.dataSource = presenter
-        tableView.register(NewsListTableViewCell.self, forCellReuseIdentifier: NewsListTableViewCell.identifier)
         tableView.refreshControl = refreshControl
+        
+        tableView.register(NewsListTableViewCell.self, forCellReuseIdentifier: NewsListTableViewCell.identifier)
+        tableView .register(NewsListTableViewHeaderView.self, forHeaderFooterViewReuseIdentifier: NewsListTableViewHeaderView.identifier)
         return tableView
     }()
 
