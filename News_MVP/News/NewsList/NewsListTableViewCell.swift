@@ -31,9 +31,7 @@ class NewsListTableViewCell: UITableViewCell {
     }()
     
     override func layoutSubviews() {
-        titleLabel.text = "기사제목기사제목기사제목기사제목기사제목기사제목기사제목"
-        descriptionLabel.text = "기사내용😃😃😃😃😃"
-        dateLabel.text = "2022.1.1"
+        super.layoutSubviews()
         
         [titleLabel, descriptionLabel, dateLabel]
             .forEach { addSubview($0) }
@@ -53,5 +51,11 @@ class NewsListTableViewCell: UITableViewCell {
             $0.leading.trailing.equalTo(titleLabel)
             $0.bottom.equalToSuperview().inset(16)
         }
+    }
+    
+    func setup(news: News) {
+        titleLabel.text = news.newTitle
+        descriptionLabel.text = news.newDescription
+        dateLabel.text = news.pubDate
     }
 }

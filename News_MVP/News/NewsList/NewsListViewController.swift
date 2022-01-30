@@ -32,10 +32,6 @@ class NewsListViewController: UIViewController {
         super.viewDidLoad()
         
         presenter.viewDidLoad()
-        NewsManager().fetchNews(from: "아이폰", display: 1, start: 10) { newsArray in
-            let a = newsArray[0].title
-            print(a)
-        }
     }
 }
 
@@ -57,9 +53,13 @@ extension NewsListViewController: NewsListProtocol {
         refreshControl.endRefreshing()
     }
     
-    func moveToNewsWebView() {
-        let newsWebViewController = NewsWebViewController()
+    func moveToNewsWebView(with news: News) {
+        let newsWebViewController = NewsWebViewController(news: news)
         navigationController?.pushViewController(newsWebViewController, animated: true)
+    }
+    
+    func reloadTableView() {
+        tableView.reloadData()
     }
 }
 
