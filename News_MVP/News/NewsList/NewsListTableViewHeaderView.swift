@@ -19,6 +19,8 @@ class NewsListTableViewHeaderView: UITableViewHeaderFooterView {
     private weak var delegate: NewsListTableViewHeaderViewDelegate?
     private lazy var tagCollectionView = TTGTextTagCollectionView()
     private var tags: [String] = []
+    private var isAddTag = false
+    private var selectedIndex: UInt = 0
     
     func setup(tags: [String], delegate: NewsListTableViewHeaderViewDelegate) {
         self.tags = tags
@@ -44,9 +46,9 @@ private extension NewsListTableViewHeaderView {
         tagCollectionView.numberOfLines = 1
         tagCollectionView.scrollDirection = .horizontal
         tagCollectionView.showsHorizontalScrollIndicator = false
-        tagCollectionView.selectionLimit = 1
+        tagCollectionView.selectionLimit = 2
         tagCollectionView.contentInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-        
+                
         let style = TTGTextTagStyle()
         style.backgroundColor = .white
         style.cornerRadius = 12
@@ -61,12 +63,14 @@ private extension NewsListTableViewHeaderView {
         selectedStyle.shadowOpacity = 0
         selectedStyle.extraSpace = CGSize(width: 20, height: 12)
         
+        guard isAddTag == false else { return }
         tags.forEach { tag in
             let tagContent = TTGTextTagStringContent(text: tag, textFont: .systemFont(ofSize: 14, weight: .semibold), textColor: .systemOrange)
             let selectedTagContent = TTGTextTagStringContent(text: tag, textFont: .systemFont(ofSize: 14, weight: .semibold), textColor: .white)
             
             let tag = TTGTextTag(content: tagContent, style: style, selectedContent: selectedTagContent, selectedStyle: selectedStyle)
             tagCollectionView.addTag(tag)
+            isAddTag = true
         }
     }
 }
@@ -74,7 +78,16 @@ private extension NewsListTableViewHeaderView {
 extension NewsListTableViewHeaderView: TTGTextTagCollectionViewDelegate {
     func textTagCollectionView(_ textTagCollectionView: TTGTextTagCollectionView!, didTap tag: TTGTextTag!, at index: UInt) {
         guard tag.selected else { return }
-//        print(tags[Int(index)])
+        
+        if tagCollectionView.allSelectedTags().count == 1 {
+            self.selectedIndex = index
+            
+        } else if tagCollectionView.allSelectedTags().count == 2 {
+            tagCollectionView.updateTag(at: self.selectedIndex, selected: false)
+            self.selectedIndex = index
+            tagCollectionView.updateTag(at: index, selected: true)
+        }
+        
         delegate?.didSelectTag(Int(index))
     }
 }
