@@ -24,7 +24,7 @@ class NewsListPresenter: NSObject {
     private var currentPage = 0
     private let display = 20
     
-    private var tags: [String] = ["IT", "아이폰", "애플", "IOS", "개발", "판교", "게임", "강남", "스타트업"]
+    private var tags: [String] = ["IT", "아이폰", "애플", "IOS", "개발", "인공지능", "서울", "게임", "신림", "스타트업", "2030"]
     
     init(viewController: NewsListProtocol, newsManager: NewsManagerProtocol = NewsManager()) {
         self.viewController = viewController

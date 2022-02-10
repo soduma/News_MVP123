@@ -7,7 +7,6 @@
 
 import Foundation
 
-// 사용하지 않았음
 extension String {
     var htmlToString: String {
         guard let data = self.data(using: .utf8) else { return "" }

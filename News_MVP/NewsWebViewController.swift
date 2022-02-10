@@ -36,7 +36,7 @@ class NewsWebViewController: UIViewController {
 
 private extension NewsWebViewController {
     func setupNavigation() {
-        navigationItem.title = news.newTitle
+        navigationItem.title = news.title.htmlToString
         navigationItem.rightBarButtonItem = rightBarButtonItem
         navigationController?.navigationBar.prefersLargeTitles = false
     }

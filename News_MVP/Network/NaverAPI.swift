@@ -17,13 +17,13 @@ struct News: Codable {
     let description: String
     let pubDate: String
     
-    var newTitle: String {
-        title.replacingOccurrences(of: "<b>", with: "")
-            .replacingOccurrences(of: "</b>", with: "")
-    }
-    
-    var newDescription: String {
-        description.replacingOccurrences(of: "<b>", with: "")
-            .replacingOccurrences(of: "</b>", with: "")
-    }
+//    var newTitle: String {
+//        title.replacingOccurrences(of: "<b>", with: "")
+//            .replacingOccurrences(of: "</b>", with: "")
+//    }
+//    
+//    var newDescription: String {
+//        description.replacingOccurrences(of: "<b>", with: "")
+//            .replacingOccurrences(of: "</b>", with: "")
+//    }
 }

@@ -54,8 +54,8 @@ class NewsListTableViewCell: UITableViewCell {
     }
     
     func setup(news: News) {
-        titleLabel.text = news.newTitle
-        descriptionLabel.text = news.newDescription
-        dateLabel.text = news.pubDate
+        titleLabel.text = news.title.htmlToString
+        descriptionLabel.text = news.description.htmlToString
+        dateLabel.text = news.pubDate.htmlToString
     }
 }
