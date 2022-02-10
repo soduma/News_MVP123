@@ -17,7 +17,6 @@ class NewsListTableViewHeaderView: UITableViewHeaderFooterView {
     static let identifier = "NewsListTableViewHeaderView"
     
     private weak var delegate: NewsListTableViewHeaderViewDelegate?
-    
     private lazy var tagCollectionView = TTGTextTagCollectionView()
     private var tags: [String] = []
     
@@ -46,7 +45,6 @@ private extension NewsListTableViewHeaderView {
         tagCollectionView.scrollDirection = .horizontal
         tagCollectionView.showsHorizontalScrollIndicator = false
         tagCollectionView.selectionLimit = 1
-        
         tagCollectionView.contentInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
         
         let style = TTGTextTagStyle()
@@ -65,11 +63,9 @@ private extension NewsListTableViewHeaderView {
         
         tags.forEach { tag in
             let tagContent = TTGTextTagStringContent(text: tag, textFont: .systemFont(ofSize: 14, weight: .semibold), textColor: .systemOrange)
-            
             let selectedTagContent = TTGTextTagStringContent(text: tag, textFont: .systemFont(ofSize: 14, weight: .semibold), textColor: .white)
             
             let tag = TTGTextTag(content: tagContent, style: style, selectedContent: selectedTagContent, selectedStyle: selectedStyle)
-            
             tagCollectionView.addTag(tag)
         }
     }
